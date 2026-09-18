@@ -9,8 +9,11 @@ import torch
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 RAW_DATASET_DIR = os.path.join(ROOT, "data", "raw", "SynPain", "Images")   # SynPAIN .jpg files go here
-FRAMES_DIR = os.path.join(ROOT, "data", "frames")                          # ImageFolder: pain/ , no_pain/
-SEQ_DIR = os.path.join(ROOT, "data", "sequences")                          # synthetic onset sequences (.npy)
+FRAMES_DIR = os.path.join(ROOT, "data", "frames")
+SEQ_DIR = os.path.join(ROOT, "data", "sequences")
+
+# Real SynPAIN video face frames
+VIDEO_FACE_DIR = os.path.join(ROOT, "data", "videos", "face_frames")
 
 CHECKPOINT_DIR = os.path.join(ROOT, "checkpoints")
 CNN_CKPT = os.path.join(CHECKPOINT_DIR, "cnn_encoder.pt")

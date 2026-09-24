@@ -1,0 +1,10 @@
+{
+  "score": 0.75,
+  "probability": 0.07492170583009719,
+  "prediction": "NO PAIN",
+  "sequence_current": 8,
+  "sequence_total": 8,
+  "alert": false,
+  "alert_reason": null,
+  "updated_at": "10:19:14"
+}

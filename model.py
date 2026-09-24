@@ -172,13 +172,13 @@ class PainCNNLSTM(nn.Module):
 
         Example:
 
-            (8, 8, 3, 128, 128)
+            (8, 8, 3, 224, 224)
 
         means:
             8 sequences
             8 frames per sequence
             RGB
-            128 x 128
+            224 x 224
         """
 
         b, t, c, h, w = x.shape
@@ -229,3 +229,56 @@ class PainCNNLSTM(nn.Module):
         self.encoder.load_state_dict(
             encoder_state
         )
+
+
+class PainIntensityLSTM(nn.Module):
+    """
+    CNN-LSTM regression head.
+
+    Input:
+        (B, T, C, H, W)
+
+    Output:
+        (B, T) intensity scores on the generated 0-10 scale.
+    """
+
+    def __init__(
+        self,
+        embed_dim=config.EMBED_DIM,
+        hidden_dim=config.LSTM_HIDDEN
+    ):
+        super().__init__()
+
+        self.encoder = CNNEncoder(
+            embed_dim=embed_dim
+        )
+
+        self.lstm = nn.LSTM(
+            input_size=embed_dim,
+            hidden_size=hidden_dim,
+            batch_first=True
+        )
+
+        self.head = nn.Sequential(
+            nn.Linear(hidden_dim, 32),
+            nn.ReLU(),
+            nn.Linear(32, 1)
+        )
+
+    def forward(self, x):
+        b, t, c, h, w = x.shape
+
+        x = x.reshape(b * t, c, h, w)
+        emb = self.encoder(x)
+        emb = emb.reshape(b, t, -1)
+        lstm_out, _ = self.lstm(emb)
+        scores = self.head(lstm_out).squeeze(-1)
+        return scores
+
+    def load_cnn_weights(self, cnn_classifier_state_dict):
+        encoder_state = {
+            k.replace("encoder.", ""): v
+            for k, v in cnn_classifier_state_dict.items()
+            if k.startswith("encoder.")
+        }
+        self.encoder.load_state_dict(encoder_state)

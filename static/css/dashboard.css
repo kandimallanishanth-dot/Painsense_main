@@ -1,0 +1,761 @@
+/* =========================================================
+   PAINSENSE DASHBOARD
+   Main stylesheet
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: #f4f7fb;
+
+    color: #172033;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTAINER
+========================================================= */
+
+.dashboard {
+    width: 100%;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    height: 78px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e9f0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 40px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.brand-icon {
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 12px;
+
+    background: #1f6feb;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+.brand h1 {
+    font-size: 21px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.3px;
+}
+
+
+.brand p {
+    margin-top: 2px;
+
+    color: #7a8496;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CAPTURE STATUS
+========================================================= */
+
+.capture-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #16803c;
+
+    letter-spacing: 0.5px;
+}
+
+
+.status-dot {
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #22a447;
+
+    box-shadow:
+        0 0 0 4px rgba(34, 164, 71, 0.12);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+    width: 100%;
+
+    max-width: 1280px;
+
+    margin: 0 auto;
+
+    padding: 32px 40px 50px;
+
+    flex: 1;
+}
+
+
+/* =========================================================
+   TOP CARDS
+========================================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        1fr
+        1fr;
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+
+.card {
+    background: #ffffff;
+
+    border: 1px solid #e5e9f0;
+
+    border-radius: 16px;
+
+    padding: 24px;
+
+    min-height: 170px;
+
+    box-shadow:
+        0 2px 8px rgba(23, 32, 51, 0.04);
+}
+
+
+.card-title {
+    color: #7a8496;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   SCORE CARD
+========================================================= */
+
+.score-card {
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.score-value {
+    display: inline-block;
+
+    font-size: 48px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    color: #172033;
+
+    letter-spacing: -2px;
+}
+
+
+.score-scale {
+    display: inline-block;
+
+    margin-left: 5px;
+
+    color: #8b95a7;
+
+    font-size: 17px;
+
+    font-weight: 500;
+}
+
+
+.score-label {
+    margin-top: 15px;
+
+    font-size: 13px;
+
+    color: #687386;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   CARD STATUS
+========================================================= */
+
+.card-status {
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #687386;
+}
+
+
+.card-status.active {
+    color: #16803c;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.small-dot {
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #22a447;
+}
+
+
+.card-description {
+    margin-top: 13px;
+
+    color: #8a94a6;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section {
+    background: #ffffff;
+
+    border: 1px solid #e5e9f0;
+
+    border-radius: 16px;
+
+    margin-bottom: 24px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 8px rgba(23, 32, 51, 0.04);
+}
+
+
+.section-header {
+    min-height: 76px;
+
+    padding: 20px 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+.section-header h2 {
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.section-header p {
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    color: #8993a5;
+}
+
+
+/* =========================================================
+   MODEL BADGE
+========================================================= */
+
+.model-badge {
+    padding: 7px 12px;
+
+    border-radius: 8px;
+
+    background: #eef5ff;
+
+    color: #1f6feb;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   LIVE MONITORING
+========================================================= */
+
+.live-panel {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    padding: 22px 24px;
+}
+
+
+.live-item {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    padding-right: 20px;
+
+    border-right: 1px solid #edf0f5;
+}
+
+
+.live-item:not(:first-child) {
+    padding-left: 20px;
+}
+
+
+.live-item:last-child {
+    border-right: none;
+}
+
+
+.live-item span {
+    color: #8a94a6;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+
+.live-item strong {
+    color: #172033;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TREND CHART
+========================================================= */
+
+.chart-container {
+    height: 330px;
+
+    padding: 24px;
+}
+
+
+#painChart {
+    width: 100% !important;
+
+    height: 100% !important;
+}
+
+
+.trend-info {
+    color: #8a94a6;
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-container {
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+thead {
+    background: #f8fafc;
+}
+
+
+th {
+    text-align: left;
+
+    padding: 13px 24px;
+
+    color: #7d8798;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+
+    font-weight: 700;
+}
+
+
+td {
+    padding: 15px 24px;
+
+    border-top: 1px solid #edf0f5;
+
+    color: #3f4a5d;
+
+    font-size: 12px;
+}
+
+
+.empty-state {
+    text-align: center;
+
+    color: #9aa3b2;
+
+    padding: 30px;
+}
+
+
+/* =========================================================
+   ALERT TABLE STATUS
+========================================================= */
+
+.alert-badge {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.alert-badge.normal {
+    background: #edf8f0;
+
+    color: #16803c;
+}
+
+
+.alert-badge.warning {
+    background: #fff6df;
+
+    color: #9a6800;
+}
+
+
+.alert-badge.danger {
+    background: #fff0f0;
+
+    color: #c62828;
+}
+
+
+/* =========================================================
+   SYSTEM INFORMATION
+========================================================= */
+
+.system-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 1px;
+
+    background: #e5e9f0;
+
+    border: 1px solid #e5e9f0;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    margin-bottom: 24px;
+}
+
+
+.system-info div {
+    background: #ffffff;
+
+    padding: 18px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.system-info span {
+    color: #8a94a6;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+
+.system-info strong {
+    color: #263148;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    min-height: 54px;
+
+    border-top: 1px solid #e5e9f0;
+
+    background: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 40px;
+
+    color: #8a94a6;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .header {
+        padding: 0 20px;
+    }
+
+
+    .main-content {
+        padding:
+            24px 20px 40px;
+    }
+
+
+    .cards {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .score-card {
+        grid-column:
+            1 / -1;
+    }
+
+
+    .live-panel {
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 20px;
+    }
+
+
+    .live-item {
+        border-right: none;
+
+        padding: 0 !important;
+    }
+
+
+    .system-info {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .header {
+        height: auto;
+
+        padding: 16px 20px;
+
+        gap: 15px;
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+
+    .score-card {
+        grid-column: auto;
+    }
+
+
+    .live-panel {
+        grid-template-columns: 1fr;
+    }
+
+
+    .system-info {
+        grid-template-columns: 1fr;
+    }
+
+
+    footer {
+        padding:
+            15px 20px;
+
+        flex-direction: column;
+
+        gap: 5px;
+
+        align-items: flex-start;
+    }
+
+}

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PainSense Monitoring Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+    <!-- =========================
+         MAIN CONTAINER
+    ========================== -->
+
+    <div class="dashboard">
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    PS
+                </div>
+
+                <div>
+                    <h1>PainSense</h1>
+
+                    <p>
+                        CNN-LSTM Pain Monitoring System
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="capture-status">
+
+                <span class="status-dot"></span>
+
+                <span>
+                    CAPTURE ACTIVE
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+
+        <main class="main-content">
+
+
+            <!-- =========================
+                 TOP CARDS
+            ========================== -->
+
+            <section class="cards">
+
+
+                <!-- PAIN SCORE -->
+
+                <div class="card score-card">
+
+                    <div class="card-title">
+                        PAIN SCORE
+                    </div>
+
+                    <div class="score-value"
+                         id="painScore">
+
+                        —
+
+                    </div>
+
+                    <div class="score-scale">
+                        / 10
+                    </div>
+
+                    <div class="score-label"
+                         id="painStatus">
+
+                        Waiting for prediction
+
+                    </div>
+
+                </div>
+
+
+                <!-- CAPTURE -->
+
+                <div class="card">
+
+                    <div class="card-title">
+                        CAPTURE
+                    </div>
+
+                    <div class="card-status active">
+
+                        <span class="small-dot"></span>
+
+                        ACTIVE
+
+                    </div>
+
+                    <p class="card-description">
+
+                        Camera / webcam
+                        connected
+
+                    </p>
+
+                </div>
+
+
+                <!-- ALERT -->
+
+                <div class="card">
+
+                    <div class="card-title">
+                        ALERT
+                    </div>
+
+                    <div class="card-status"
+                         id="alertStatus">
+
+                        STANDBY
+
+                    </div>
+
+                    <p class="card-description"
+                       id="alertReason">
+
+                        No active alert
+
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =========================
+                 LIVE STATUS
+            ========================== -->
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Live Monitoring
+                        </h2>
+
+                        <p>
+                            Current CNN-LSTM inference
+                        </p>
+
+                    </div>
+
+                    <div class="model-badge">
+
+                        CNN + LSTM
+
+                    </div>
+
+                </div>
+
+
+                <div class="live-panel">
+
+
+                    <div class="live-item">
+
+                        <span>
+                            Prediction
+                        </span>
+
+                        <strong id="prediction">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="live-item">
+
+                        <span>
+                            Pain Score
+                        </span>
+
+                        <strong id="painProbability">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="live-item">
+
+                        <span>
+                            Sequence
+                        </span>
+
+                        <strong id="sequenceStatus">
+                            0 / 8
+                        </strong>
+
+                    </div>
+
+
+                    <div class="live-item">
+
+                        <span>
+                            Model
+                        </span>
+
+                        <strong>
+                            CNN-LSTM
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 PAIN TREND
+            ========================== -->
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Pain Score Trend
+                        </h2>
+
+                        <p>
+                            Recent pain observations
+                        </p>
+
+                    </div>
+
+                    <div class="trend-info">
+
+                        Last 10 observations
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <canvas id="painChart"></canvas>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 RECENT OBSERVATIONS
+            ========================== -->
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Recent Observations
+                        </h2>
+
+                        <p>
+                            Latest recorded predictions
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Time
+                                </th>
+
+                                <th>
+                                    Pain Score
+                                </th>
+
+                                <th>
+                                    Prediction
+                                </th>
+
+                                <th>
+                                    Alert
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="historyTable">
+
+                            <tr>
+
+                                <td colspan="4"
+                                    class="empty-state">
+
+                                    Waiting for data...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 SYSTEM INFORMATION
+            ========================== -->
+
+            <section class="system-info">
+
+                <div>
+
+                    <span>
+                        MODEL
+                    </span>
+
+                    <strong>
+                        CNN-LSTM
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        INPUT
+                    </span>
+
+                    <strong>
+                        Facial Video
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        SEQUENCE
+                    </span>
+
+                    <strong>
+                        8 Frames
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        OUTPUT
+                    </span>
+
+                    <strong>
+                        Pain Score
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+
+        <!-- =========================
+             FOOTER
+        ========================== -->
+
+        <footer>
+
+            <span>
+                PainSense • Research Prototype
+            </span>
+
+            <span>
+                CNN → LSTM → Pain Score → Alert
+            </span>
+
+        </footer>
+
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}">
+    </script>
+
+</body>
+
+</html>

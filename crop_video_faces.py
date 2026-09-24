@@ -1,4 +1,5 @@
 import cv2
+import config
 from pathlib import Path
 
 # Project root
@@ -79,7 +80,7 @@ for video_folder in video_folders:
         face = image[y1:y2, x1:x2]
 
         # Resize to the same size expected by the CNN
-        face = cv2.resize(face, (128, 128))
+        face = cv2.resize(face,(config.IMG_SIZE, config.IMG_SIZE))
 
         output_path = output_folder / frame_path.name
 

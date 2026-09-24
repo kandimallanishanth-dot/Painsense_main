@@ -1,30 +1,31 @@
 """
 PainSense - alert rules.
 
-Two independent rules, matching the proposal / Review-2 deck:
-  1. THRESHOLD rule: current score crosses ALERT_THRESHOLD.
-  2. TREND rule: score has risen by >= TREND_RISE over the last TREND_WINDOW
-     readings (sustained upward trend, even if still under threshold).
+An alert is generated when:
+    1. A valid face is present
+    2. The estimated intensity score reaches ALERT_THRESHOLD
 """
+
 import config
 
 
-def check_threshold(score):
-    return score >= config.ALERT_THRESHOLD
+def evaluate(score, face_detected=True):
+    """
+    Return (alert, reason) for a 0-10 intensity score.
+    """
 
+    if not face_detected or score is None:
+        return False, None
 
-def check_trend(history_scores):
-    """history_scores: list of recent scores, oldest -> newest."""
-    if len(history_scores) < config.TREND_WINDOW:
-        return False
-    window = history_scores[-config.TREND_WINDOW:]
-    return (window[-1] - window[0]) >= config.TREND_RISE
+    score = max(
+        float(config.PAIN_SCORE_MIN),
+        min(float(config.PAIN_SCORE_MAX), float(score))
+    )
 
+    if score >= config.ALERT_THRESHOLD:
+        return True, (
+            f"Pain score {score:.1f} reached "
+            f"threshold {config.ALERT_THRESHOLD:.1f}"
+        )
 
-def evaluate(score, history_scores):
-    """Returns (alert: bool, reason: str|None)"""
-    if check_threshold(score):
-        return True, f"Score {score:.1f} crossed threshold ({config.ALERT_THRESHOLD})"
-    if check_trend(history_scores + [score]):
-        return True, f"Sustained upward trend over last {config.TREND_WINDOW} readings"
     return False, None
